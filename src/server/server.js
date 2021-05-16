@@ -10,11 +10,13 @@ const port = 3001;
 
 const app = express();
 
+
 app.get('/gists', (req, res) => {
    const query = url.parse(req.url, true).query;
    const username = query.username;
 
    const response = gistWrapper.fetchGistsForUsername(username);
+   console.log(response);
 
    res.status(200).send(response);
 });
