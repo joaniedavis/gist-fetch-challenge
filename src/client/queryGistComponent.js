@@ -16,6 +16,9 @@ export default class QueryGistComponent extends React.Component {
 
     handleSubmitButtonClicked(event) {
         event.preventDefault(); // Stops the page from reloading upon submission.
+        this.setState({
+           responseData: [],
+        });
         this.fetchSearchResults();
     }
 
@@ -57,8 +60,10 @@ export default class QueryGistComponent extends React.Component {
                             const formattedDate = Moment(gistData.date).format('MMMM Do YYYY, h:mm:ss a')
                             return (
                                 <div key={index}>
+                                    <h3>ID: {gistData.id}</h3>
                                     <h3>Date: {formattedDate}</h3>
                                     <h3>Description: {gistData.description}</h3>
+                                    <br/>
                                 </div>
                             )
                         })

@@ -12,35 +12,41 @@ function formatAPIResponse(jsonResponse) {
     let minimumResponseData = [];
 
     jsonResponse.forEach((gistData) => {
+        const id = gistData['id'];
         const createdDate = gistData['created_at'];
         const description = gistData['description'] ? gistData['description'] : 'No description given';
-        minimumResponseData.push({date: createdDate, description: description});
+        minimumResponseData.push({id: id, date: createdDate, description: description});
     });
     return minimumResponseData;
 }
 
 exports.fetchGistsForUsername = function (username) {
     // const options = {
-    //     url: fetchAllGistsURL(username),
+    //     hostname: 'api.github.com',
+    //     path: `/users/${username}/gists`,
     //     method: 'GET',
     //     headers: { 'user-agent': 'node.js' }
     // }
-    //
+
     // const request = https.request(options, (resp) => {
-    //     console.log(resp);
+    //     let result = ''
+    //     resp.on('data', function (chunk) {
+    //         console.log(chunk);
+    //         result += chunk;
+    //     });
+    //
+    //     resp.on('end', function () {
+    //         console.log(result);
+    //     });
+    //     resp.on('error', function(err) {
+    //        console.log(err);
+    //     });
     // });
 
-    // request(options, { json:true }, (err, res, body) => {
-    //     if(err) {
-    //         console.log(`ERROR: ${err}`);
-    //         console.log(body.explanation);
-    //     } else {
-    //         console.log(res);
-    //         console.log(body);
-    //     }
-    // });
 
-    const APIResponse = fs.readFileSync('./response.json', {encoding: 'utf-8'});
+    // return [];
+
+    const APIResponse = fs.readFileSync('./server/response.json', {encoding: 'utf-8'});
     const parsedResponse = JSON.parse(APIResponse.toString());
     // console.log(parsedResponse);
     return formatAPIResponse(parsedResponse);

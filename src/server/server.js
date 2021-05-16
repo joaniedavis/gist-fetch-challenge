@@ -17,8 +17,6 @@ app.get('/gists', (req, res) => {
 
     const response = gistWrapper.fetchGistsForUsername(username);
 
-    console.log(response);
-
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.status(200).send({data: response});
 });
