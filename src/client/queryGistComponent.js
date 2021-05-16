@@ -1,6 +1,7 @@
 // This will wrap the logic for the form that will communicate with the server API and display the provided results.
 import React from 'react';
 import $ from 'jquery';
+import Moment from 'moment'
 
 
 export default class QueryGistComponent extends React.Component {
@@ -53,9 +54,10 @@ export default class QueryGistComponent extends React.Component {
                     {
                         this.state.responseData.map(function (gistData, index) {
                             // TODO: Break this out into its own component.
+                            const formattedDate = Moment(gistData.date).format('MMMM Do YYYY, h:mm:ss a')
                             return (
                                 <div key={index}>
-                                    <h3>Date: {gistData.date}</h3>
+                                    <h3>Date: {formattedDate}</h3>
                                     <h3>Description: {gistData.description}</h3>
                                 </div>
                             )
