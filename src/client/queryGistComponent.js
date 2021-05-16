@@ -1,11 +1,16 @@
 // This will wrap the logic for the form that will communicate with the server API and display the provided results.
 import React from "react";
+import $ from 'jquery';
+
 
 export default class QueryGistComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        // Set up state to allow for retrieving information from form
+        this.state = {
+            searchQuery: '',
+            responseData: [],
+        }
     }
 
     handleSubmitButtonClicked(event) {
@@ -13,9 +18,24 @@ export default class QueryGistComponent extends React.Component {
         this.fetchSearchResults();
     }
 
+    handleQueryInputChanged(event) {
+        this.setState({
+            searchQuery: event.target.value,
+        });
+    }
+
     fetchSearchResults() {
-        // Query search API once implemented. For now, just log that we got here.
-        console.log('Querying!');
+        let context = this;
+        let query = this.state.searchQuery;
+        $.ajax({
+            url: `http://127.0.0.1:3001/gists/?username=${query}`,
+            method: 'GET',
+            success: function(response) {
+                context.setState({
+                    responseData: response.data,
+                });
+            }
+        });
     }
 
     render() {
@@ -23,7 +43,8 @@ export default class QueryGistComponent extends React.Component {
             <div>
                 <form>
                     <h1>Search for Gists</h1>
-                    <input type='text' placeholder='Enter a username to search' />
+                    <input type='text' placeholder='Enter a username to search'
+                           onChange={ this.handleQueryInputChanged.bind(this) } />
                     <button onClick={ this.handleSubmitButtonClicked.bind(this) }>
                         Submit
                     </button>

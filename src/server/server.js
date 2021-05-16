@@ -16,11 +16,13 @@ app.get('/gists', (req, res) => {
    const username = query.username;
 
    const response = gistWrapper.fetchGistsForUsername(username);
+
    console.log(response);
 
-   res.status(200).send(response);
+   res.setHeader('Access-Control-Allow-Origin', '*');
+   res.status(200).send({ data: response });
 });
 
 app.listen(port, () => {
-   console.log(`Gist Fetch Server listening on port ${port}`);
+   console.log(`Gist Fetch Server listening on port ${ port }`);
 });
