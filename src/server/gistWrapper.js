@@ -14,12 +14,12 @@ function formatAPIResponse(jsonResponse) {
     jsonResponse.forEach((gistData) => {
         const createdDate = gistData['created_at'];
         const description = gistData['description'] ? gistData['description'] : 'No description given';
-        minimumResponseData.push({ date: createdDate, description: description });
+        minimumResponseData.push({date: createdDate, description: description});
     });
     return minimumResponseData;
 }
 
-exports.fetchGistsForUsername = function(username) {
+exports.fetchGistsForUsername = function (username) {
     // const options = {
     //     url: fetchAllGistsURL(username),
     //     method: 'GET',

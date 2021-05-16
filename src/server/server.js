@@ -12,17 +12,17 @@ const app = express();
 
 
 app.get('/gists', (req, res) => {
-   const query = url.parse(req.url, true).query;
-   const username = query.username;
+    const query = url.parse(req.url, true).query;
+    const username = query.username;
 
-   const response = gistWrapper.fetchGistsForUsername(username);
+    const response = gistWrapper.fetchGistsForUsername(username);
 
-   console.log(response);
+    console.log(response);
 
-   res.setHeader('Access-Control-Allow-Origin', '*');
-   res.status(200).send({ data: response });
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.status(200).send({data: response});
 });
 
 app.listen(port, () => {
-   console.log(`Gist Fetch Server listening on port ${ port }`);
+    console.log(`Gist Fetch Server listening on port ${port}`);
 });
